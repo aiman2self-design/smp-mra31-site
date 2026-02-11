@@ -209,6 +209,39 @@
             cursor: pointer;
         }
 
+        .burger {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .burger {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 80px;
+                right: 5%;
+                background: var(--card-bg);
+                border: 1px solid var(--primary-color);
+                border-radius: 10px;
+                padding: 20px;
+                display: none;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav.active {
+                display: block;
+            }
+        }
+
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -238,11 +271,14 @@
 
     <header>
         <div class="logo">SMP <span>mra31</span></div>
-        <nav>
+
+        <div class="burger" onclick="toggleMenu()">☰</div>
+
+        <nav id="nav-menu">
             <ul>
                 <li><a href="index.html">Главная</a></li>
                 <li><a href="rules.html">Правила</a></li>
-                <li><a href="#">Донат</a></li>
+                <li><a href="donat.html">Донат</a></li>
             </ul>
         </nav>
     </header>
@@ -365,6 +401,11 @@
         function closeModal() {
             document.getElementById("paymentModal").style.display = "none";
         }
+
+        function toggleMenu() {
+            document.getElementById("nav-menu").classList.toggle("active");
+        }
+
     </script>
 
 

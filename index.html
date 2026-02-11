@@ -53,7 +53,7 @@
             z-index: 1000;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: start;
             border-bottom: 1px solid rgba(157, 0, 255, 0.2);
         }
 
@@ -193,7 +193,7 @@
             color: var(--primary-color);
         }
 
-        .tgtext{
+        .tgtext {
             color: var(--text-color);
         }
 
@@ -206,21 +206,41 @@
             font-size: 0.9rem;
         }
 
-        /* Адаптивность */
+        .burger {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            .burger {
+                display: block;
             }
 
             nav {
+                position: absolute;
+                top: 80px;
+                right: 5%;
+                background: var(--card-bg);
+                border: 1px solid var(--primary-color);
+                border-radius: 10px;
+                padding: 20px;
                 display: none;
             }
 
-            /* Для простоты на мобильных скрываем меню */
-            .logo {
-                margin: 0 auto;
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav.active {
+                display: block;
             }
         }
+
+
+        /* Адаптивность */
+
     </style>
 </head>
 
@@ -228,15 +248,18 @@
 
     <header>
         <div class="logo">SMP <span>mra31</span></div>
-        <nav>
+
+        <div class="burger" onclick="toggleMenu()">☰</div>
+
+        <nav id="nav-menu">
             <ul>
-                <li><a href="#">Главная</a></li>
-                <li><a href="./rules.html">Правила</a></li>
-                <li><a href="./donat.html">Донат</a></li>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="rules.html">Правила</a></li>
+                <li><a href="donat.html">Донат</a></li>
             </ul>
         </nav>
     </header>
-git init
+
     <section class="hero">
         <h1>Добро пожаловать</h1>
         <p>Уникальный мир выживания, где создаешь историю ты. Присоединяйся к сообществу SMP mra31 уже сегодня.</p>
@@ -257,8 +280,9 @@ git init
 
             <div class="card">
                 <h3>💬 Наш телеграм канал</h3>
-                <p>Тут можно обсуждать с игроками всю информацию о сервере <br> <a href="https://t.me/+BVSpqoSj-0NlNzhi" style="color: var(--primary-color);">Телеграм канал</a></p>
-                
+                <p>Тут можно обсуждать с игроками всю информацию о сервере <br> <a href="https://t.me/+BVSpqoSj-0NlNzhi"
+                        style="color: var(--primary-color);">Телеграм канал</a></p>
+
             </div>
 
             <div class="card">
@@ -291,6 +315,11 @@ git init
     </footer>
 
     <script>
+
+        function toggleMenu() {
+            document.getElementById("nav-menu").classList.toggle("active");
+        }
+
         function copyIp() {
             // IP адрес сервера
             const serverIp = "185.206.149.25:25603";
@@ -318,7 +347,7 @@ git init
             });
 
 
-             // Копирование в буфер обмена тгк
+            // Копирование в буфер обмена тгк
             navigator.clipboard.writeText(telegramLink).then(() => {
                 // Показать уведомление
                 const tooltip = document.getElementById("tooltip-telegram");

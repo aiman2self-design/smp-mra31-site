@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +11,20 @@
             --bg-color: #050505;
             --card-bg: #0f0f12;
             --primary-color: #9d00ff;
-            --success-color: #00ff9d; /* Неоновый зеленый */
-            --danger-color: #ff0055;  /* Неоновый красный */
+            --success-color: #00ff9d;
+            /* Неоновый зеленый */
+            --danger-color: #ff0055;
+            /* Неоновый красный */
             --text-color: #ffffff;
             --text-secondary: #b3b3b3;
             --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             background-color: var(--bg-color);
@@ -25,13 +32,20 @@
             font-family: var(--font-main);
             line-height: 1.6;
             overflow-x: hidden;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.1) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(255, 0, 85, 0.05) 0%, transparent 40%);
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
 
         /* --- Хедер --- */
         header {
@@ -48,11 +62,27 @@
             border-bottom: 1px solid rgba(157, 0, 255, 0.2);
         }
 
-        .logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 1px; color: #fff; }
-        .logo span { color: var(--primary-color); text-shadow: 0 0 10px rgba(157, 0, 255, 0.6); }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+        }
 
-        nav ul { display: flex; gap: 30px; }
-        nav a:hover { color: var(--primary-color); text-shadow: 0 0 8px var(--primary-color); }
+        .logo span {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(157, 0, 255, 0.6);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 8px var(--primary-color);
+        }
 
         /* --- Контент правил --- */
         .container {
@@ -67,7 +97,7 @@
             margin-bottom: 10px;
             text-transform: uppercase;
         }
-        
+
         .page-subtitle {
             text-align: center;
             color: var(--text-secondary);
@@ -89,8 +119,13 @@
             border: 1px solid #1f1f1f;
         }
 
-        .rules-column.allowed { border-top: 4px solid var(--success-color); }
-        .rules-column.forbidden { border-top: 4px solid var(--danger-color); }
+        .rules-column.allowed {
+            border-top: 4px solid var(--success-color);
+        }
+
+        .rules-column.forbidden {
+            border-top: 4px solid var(--danger-color);
+        }
 
         .rules-column h2 {
             font-size: 1.8rem;
@@ -99,28 +134,55 @@
             align-items: center;
             gap: 10px;
         }
-        
-        .allowed h2 { color: var(--success-color); }
-        .forbidden h2 { color: var(--danger-color); }
+
+        .allowed h2 {
+            color: var(--success-color);
+        }
+
+        .forbidden h2 {
+            color: var(--danger-color);
+        }
 
         .rule-item {
             margin-bottom: 20px;
             padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .rule-item:last-child { border-bottom: none; }
 
-        .rule-item h3 { font-size: 1.2rem; margin-bottom: 5px; color: #fff; }
-        .rule-item p { color: var(--text-secondary); font-size: 0.95rem; }
-        .highlight { color: var(--primary-color); font-weight: bold; }
-        .warning { color: var(--danger-color); font-weight: bold; }
+        .rule-item:last-child {
+            border-bottom: none;
+        }
+
+        .rule-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .rule-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .warning {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
 
         /* Секция: Моды */
-        .mods-section { margin-top: 60px; }
-        .section-header { 
-            text-align: center; 
-            margin-bottom: 40px; 
-            font-size: 2rem; 
+        .mods-section {
+            margin-top: 60px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
             color: var(--danger-color);
             text-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
         }
@@ -177,8 +239,11 @@
             text-align: center;
         }
 
-        .whitelist-section h2 { color: var(--success-color); margin-bottom: 20px; }
-        
+        .whitelist-section h2 {
+            color: var(--success-color);
+            margin-bottom: 20px;
+        }
+
         .whitelist-grid {
             display: flex;
             flex-wrap: wrap;
@@ -203,21 +268,67 @@
             color: var(--text-secondary);
         }
 
+        .burger {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
-            .rules-split { grid-template-columns: 1fr; }
-            .page-title { font-size: 2rem; }
-            nav { display: none; }
+            .burger {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 80px;
+                right: 5%;
+                background: var(--card-bg);
+                border: 1px solid var(--primary-color);
+                border-radius: 10px;
+                padding: 20px;
+                display: none;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav.active {
+                display: block;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .rules-split {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            nav {
+                display: none;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <header>
         <div class="logo">SMP <span>mra31</span></div>
-        <nav>
+
+        <div class="burger" onclick="toggleMenu()">☰</div>
+
+        <nav id="nav-menu">
             <ul>
-                <li><a href="index.html">Главная</a></li> <li><a href="#">Правила</a></li>
-                <li><a href="./donat.html">Донат</a></li>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="rules.html">Правила</a></li>
+                <li><a href="donat.html">Донат</a></li>
             </ul>
         </nav>
     </header>
@@ -227,15 +338,16 @@
         <p class="page-subtitle">Незнание правил не освобождает от ответственности</p>
 
         <div class="rules-split">
-            
+
             <div class="rules-column allowed">
                 <h2>✅ Разрешено</h2>
-                
+
                 <div class="rule-item">
                     <h3>Гриферство</h3>
-                    <p>Полная свобода! Грабьте базы, взрывайте и забирайте ресурсы. <br><em>Администрация вещи не восстанавливает.</em></p>
+                    <p>Полная свобода! Грабьте базы, взрывайте и забирайте ресурсы. <br><em>Администрация вещи не
+                            восстанавливает.</em></p>
                 </div>
-                
+
                 <div class="rule-item">
                     <h3>ПВП (PvP)</h3>
                     <p>Сражайтесь везде, кроме региона спавна.</p>
@@ -243,7 +355,9 @@
 
                 <div class="rule-item">
                     <h3>Торговля и Кланы</h3>
-                    <p>Стройте города и союзы. <br><span class="warning">ВАЖНО:</span> Максимум <span class="highlight">2 игрока</span> в команде! Нарушение = Бан на 2 дня + очистка инвентаря всей команде.</p>
+                    <p>Стройте города и союзы. <br><span class="warning">ВАЖНО:</span> Максимум <span
+                            class="highlight">2 игрока</span> в команде! Нарушение = Бан на 2 дня + очистка инвентаря
+                        всей команде.</p>
                 </div>
 
                 <div class="rule-item">
@@ -254,15 +368,17 @@
 
             <div class="rules-column forbidden">
                 <h2>❌ Запрещено</h2>
-                
+
                 <div class="rule-item">
                     <h3>Читы и ПО</h3>
-                    <p>Любой софт, дающий преимущество (X-Ray, KillAura, Fly и др). <br><span class="warning">Наказание: Вечный бан.</span></p>
+                    <p>Любой софт, дающий преимущество (X-Ray, KillAura, Fly и др). <br><span class="warning">Наказание:
+                            Вечный бан.</span></p>
                 </div>
 
                 <div class="rule-item">
                     <h3>Дюпы и Баги</h3>
-                    <p>Запрещено размножать предметы. Нашли баг — сообщите админу. <br><span class="warning">Наказание: Бан + очистка.</span></p>
+                    <p>Запрещено размножать предметы. Нашли баг — сообщите админу. <br><span class="warning">Наказание:
+                            Бан + очистка.</span></p>
                 </div>
 
                 <div class="rule-item">
@@ -284,7 +400,7 @@
 
         <div class="mods-section">
             <h2 class="section-header">🚫 Blacklist Модификаций</h2>
-            
+
             <div class="mods-grid">
                 <div class="mod-card">
                     <h3>1. Чит-клиенты</h3>
@@ -370,5 +486,12 @@
         <p>made by mra31</p>
     </footer>
 
+    <script>
+        function toggleMenu() {
+            document.getElementById("nav-menu").classList.toggle("active");
+        }
+    </script>
+
 </body>
+
 </html>
