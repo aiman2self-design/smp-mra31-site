@@ -346,24 +346,21 @@
             <div class="grid">
                 <div class="card">
                     <h3>VIP</h3>
-                    <p>/kit vip, цветной ник, 2 дома</p>
                     <div class="price">249 сом</div>
                     <a href="#" class="buy-btn" onclick="openModal('VIP')">Купить</a>
-
+                    <a href="#" class="buy-btn" onclick="openDetails('VIP')">Подробнее...</a>
                 </div>
                 <div class="card">
                     <h3>PREMIUM</h3>
-                    <p>/fly, 5 домов, приоритет входа</p>
                     <div class="price">399 сом</div>
                     <a href="#" class="buy-btn" onclick="openModal('PREMIUM')">Купить</a>
-
+                    <a href="#" class="buy-btn" onclick="openDetails('PREMIUM')">Подробнее...</a>
                 </div>
                 <div class="card">
                     <h3>LEGEND</h3>
-                    <p>Все команды + особый префикс</p>
                     <div class="price">699 сом</div>
                     <a href="#" class="buy-btn" onclick="openModal('LEGEND')">Купить</a>
-
+                    <a href="#" class="buy-btn" onclick="openDetails('LEGEND')">Подробнее...</a>
                 </div>
             </div>
         </div>
@@ -381,6 +378,7 @@
                     <h3>Колесо фортуны</h3>
                     <div class="price">399 сом</div>
                     <a href="#" class="buy-btn" onclick="openModal('Колесо фортуны')">Купить</a>
+                    <a href="#" class="buy-btn" onclick="openDetails('Wheel')">Подробнее...</a>
                 </div>
                 <div class="card">
                     <h3>Свой префикс</h3>
@@ -411,8 +409,43 @@
             document.getElementById("nav-menu").classList.toggle("active");
         }
 
+        function openDetails(role) {
+            const title = document.getElementById('detailsTitle');
+            const text = document.getElementById('detailsText');
+
+            if (role === 'VIP') {
+                title.innerText = 'VIP Привилегия';
+                text.innerHTML = 'Команды и возможности:<br>• fly<br>• heal<br>• chatcolor';
+            } else if (role === 'PREMIUM') {
+                title.innerText = 'PREMIUM Привилегия';
+                text.innerHTML = 'Команды и возможности:<br>• fly<br>• heal<br>• chatcolor<br>• feed<br>• extinguish<br>• joinfullserver';
+            } else if (role === 'LEGEND') {
+                title.innerText = 'LEGEND Привилегия';
+                text.innerHTML = 'Команды и возможности:<br>• fly<br>• heal<br>• chatcolor<br>• feed<br>• extinguish<br>• joinfullserver<br>• все команды PREMIUM + особый префикс';
+            } else if (role === 'Wheel') {
+                title.innerText = 'Колесо фортуны 🎡';
+                text.innerHTML = 'Возможные награды:<br>• Киты (Железный, Алмазный, Незерит)<br>• Привилегии на 3 дня<br>• Случайные предметы (алмазы, тотемы)<br>• Редкие бонусы (пефикс, уникальный предмет)<br><br>Каждое вращение — шанс получить уникальный приз!';
+            }
+
+            document.getElementById('detailsModal').style.display = 'block';
+        }
+
+
+        function closeDetails() {
+            document.getElementById('detailsModal').style.display = 'none';
+        }
+
+
     </script>
 
+    <!-- Модальное окно характеристик -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDetails()">&times;</span>
+            <h2 id="detailsTitle"></h2>
+            <p id="detailsText"></p>
+        </div>
+    </div>
 
     <!-- Модальное окно оплаты -->
     <div id="paymentModal" class="modal">
