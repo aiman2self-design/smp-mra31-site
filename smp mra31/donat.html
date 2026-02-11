@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Донат - SMP mra31</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: #0f0f12;
+            --primary-color: #9d00ff;
+            --success-color: #00ff9d;
+            --danger-color: #ff0055;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 85, 0.05) 0%, transparent 40%);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        header {
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(157, 0, 255, 0.6);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 8px var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-align: center;
+            text-shadow: 0 0 15px rgba(157, 0, 255, 0.4);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #1f1f1f;
+            padding: 25px;
+            border-radius: 20px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.2);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            color: var(--success-color);
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .buy-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: var(--primary-color);
+            color: #fff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #b833ff;
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        footer {
+            margin-top: 80px;
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 1px solid #1f1f1f;
+            color: var(--text-secondary);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(6px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid var(--primary-color);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .qr-image {
+            width: 220px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .pay-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .close {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">SMP <span>mra31</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="rules.html">Правила</a></li>
+                <li><a href="#">Донат</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">Донат Магазин</h1>
+        <p class="page-subtitle">Поддержи сервер и получи преимущества ⚡ (Валюта: KGZ сом)</p>
+
+        <!-- Киты -->
+        <div class="section">
+            <h2>⚔ Киты</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Железный Кит</h3>
+                    <p>Железная броня + инструменты + 16 стейков</p>
+                    <div class="price">149 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('Железный Кит')">Купить</a>
+
+                </div>
+                <div class="card">
+                    <h3>Алмазный Кит</h3>
+                    <p>Алмазная броня + меч + тотем</p>
+                    <div class="price">299 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('Алмазный Кит')">Купить</a>
+
+                </div>
+                <div class="card">
+                    <h3>Незеритовый Кит</h3>
+                    <p>Фулл незерит + зачарования + 2 тотема</p>
+                    <div class="price">499 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('Незеритовый Кит')">Купить</a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Предметы -->
+        <div class="section">
+            <h2>💎 Драгоценные предметы</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>1 Алмазный блок</h3>
+                    <div class="price">199 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('1 Алмазный блок')">Купить</a>
+
+                </div>
+                <div class="card">
+                    <h3>1 Незеритовый слиток</h3>
+                    <div class="price">399 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('1 Незеритовый слиток')">Купить</a>
+
+                </div>
+                <div class="card">
+                    <h3>5 Тотемов</h3>
+                    <div class="price">179 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('5 Тотемов')">Купить</a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Привилегии -->
+        <div class="section">
+            <h2>👑 Привилегии</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>VIP</h3>
+                    <p>/kit vip, цветной ник, 2 дома</p>
+                    <div class="price">249 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('VIP')">Купить</a>
+
+                </div>
+                <div class="card">
+                    <h3>PREMIUM</h3>
+                    <p>/fly, 5 домов, приоритет входа</p>
+                    <div class="price">399 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('PREMIUM')">Купить</a>
+
+                </div>
+                <div class="card">
+                    <h3>LEGEND</h3>
+                    <p>Все команды + особый префикс</p>
+                    <div class="price">699 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('LEGEND')">Купить</a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Дополнительно -->
+        <div class="section">
+            <h2>🔥 Дополнительно</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Разбан</h3>
+                    <div class="price">999 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('Разбан')">Купить</a>
+                </div>
+                <div class="card">
+                    <h3>Колесо фортуны</h3>
+                    <div class="price">399 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('Колесо фортуны')">Купить</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 SMP mra31. Спасибо за поддержку сервера!</p>
+        <p>made by mra31</p>
+    </footer>
+
+    <script>
+        function openModal(product) {
+            document.getElementById("paymentModal").style.display = "block";
+            document.getElementById("productName").innerText = "Вы покупаете: " + product;
+        }
+
+        function closeModal() {
+            document.getElementById("paymentModal").style.display = "none";
+        }
+    </script>
+
+
+    <!-- Модальное окно оплаты -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Оплата</h2>
+            <p id="productName"></p>
+            <img src="./photo_2026-02-11_20-12-25.jpg" alt="QR Код" class="qr-image">
+            <p class="pay-text">
+                1️⃣ Отсканируйте QR и оплатите<br>
+                2️⃣ Отправьте чек в Telegram / WhatsApp: <b>@MRA3199 / +996 774 31 01 10</b><br>
+                3️⃣ Укажите ваш ник и что купили
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>

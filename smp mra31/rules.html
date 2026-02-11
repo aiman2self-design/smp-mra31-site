@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила сервера - SMP mra31</title>
+    <style>
+        /* --- Базовые стили (как на главной) --- */
+        :root {
+            --bg-color: #050505;
+            --card-bg: #0f0f12;
+            --primary-color: #9d00ff;
+            --success-color: #00ff9d; /* Неоновый зеленый */
+            --danger-color: #ff0055;  /* Неоновый красный */
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 85, 0.05) 0%, transparent 40%);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- Хедер --- */
+        header {
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+        }
+
+        .logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 1px; color: #fff; }
+        .logo span { color: var(--primary-color); text-shadow: 0 0 10px rgba(157, 0, 255, 0.6); }
+
+        nav ul { display: flex; gap: 30px; }
+        nav a:hover { color: var(--primary-color); text-shadow: 0 0 8px var(--primary-color); }
+
+        /* --- Контент правил --- */
+        .container {
+            max-width: 1200px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+        }
+
+        /* Секция: Можно vs Нельзя */
+        .rules-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .rules-column {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #1f1f1f;
+        }
+
+        .rules-column.allowed { border-top: 4px solid var(--success-color); }
+        .rules-column.forbidden { border-top: 4px solid var(--danger-color); }
+
+        .rules-column h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .allowed h2 { color: var(--success-color); }
+        .forbidden h2 { color: var(--danger-color); }
+
+        .rule-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .rule-item:last-child { border-bottom: none; }
+
+        .rule-item h3 { font-size: 1.2rem; margin-bottom: 5px; color: #fff; }
+        .rule-item p { color: var(--text-secondary); font-size: 0.95rem; }
+        .highlight { color: var(--primary-color); font-weight: bold; }
+        .warning { color: var(--danger-color); font-weight: bold; }
+
+        /* Секция: Моды */
+        .mods-section { margin-top: 60px; }
+        .section-header { 
+            text-align: center; 
+            margin-bottom: 40px; 
+            font-size: 2rem; 
+            color: var(--danger-color);
+            text-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
+        }
+
+        .mods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .mod-card {
+            background: rgba(255, 0, 85, 0.03);
+            border: 1px solid rgba(255, 0, 85, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .mod-card:hover {
+            background: rgba(255, 0, 85, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .mod-card h3 {
+            color: var(--danger-color);
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 0, 85, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .mod-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .mod-list li::before {
+            content: "✖";
+            position: absolute;
+            left: 0;
+            color: var(--danger-color);
+            font-size: 0.8rem;
+        }
+
+        /* Разрешенные моды */
+        .whitelist-section {
+            margin-top: 60px;
+            background: rgba(0, 255, 157, 0.03);
+            border: 1px solid var(--success-color);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .whitelist-section h2 { color: var(--success-color); margin-bottom: 20px; }
+        
+        .whitelist-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .white-item {
+            background: rgba(0, 255, 157, 0.1);
+            color: var(--success-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* Футер */
+        footer {
+            margin-top: 80px;
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 1px solid #1f1f1f;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .rules-split { grid-template-columns: 1fr; }
+            .page-title { font-size: 2rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">SMP <span>mra31</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li> <li><a href="#">Правила</a></li>
+                <li><a href="./donat.html">Донат</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">Кодекс Сервера</h1>
+        <p class="page-subtitle">Незнание правил не освобождает от ответственности</p>
+
+        <div class="rules-split">
+            
+            <div class="rules-column allowed">
+                <h2>✅ Разрешено</h2>
+                
+                <div class="rule-item">
+                    <h3>Гриферство</h3>
+                    <p>Полная свобода! Грабьте базы, взрывайте и забирайте ресурсы. <br><em>Администрация вещи не восстанавливает.</em></p>
+                </div>
+                
+                <div class="rule-item">
+                    <h3>ПВП (PvP)</h3>
+                    <p>Сражайтесь везде, кроме региона спавна.</p>
+                </div>
+
+                <div class="rule-item">
+                    <h3>Торговля и Кланы</h3>
+                    <p>Стройте города и союзы. <br><span class="warning">ВАЖНО:</span> Максимум <span class="highlight">2 игрока</span> в команде! Нарушение = Бан на 2 дня + очистка инвентаря всей команде.</p>
+                </div>
+
+                <div class="rule-item">
+                    <h3>Ловушки</h3>
+                    <p>Стройте любые механизмы для защиты базы или поимки врагов.</p>
+                </div>
+            </div>
+
+            <div class="rules-column forbidden">
+                <h2>❌ Запрещено</h2>
+                
+                <div class="rule-item">
+                    <h3>Читы и ПО</h3>
+                    <p>Любой софт, дающий преимущество (X-Ray, KillAura, Fly и др). <br><span class="warning">Наказание: Вечный бан.</span></p>
+                </div>
+
+                <div class="rule-item">
+                    <h3>Дюпы и Баги</h3>
+                    <p>Запрещено размножать предметы. Нашли баг — сообщите админу. <br><span class="warning">Наказание: Бан + очистка.</span></p>
+                </div>
+
+                <div class="rule-item">
+                    <h3>Таргет новичков</h3>
+                    <p>Не караульте новых игроков на спавне. Дайте им шанс уйти и развиться.</p>
+                </div>
+
+                <div class="rule-item">
+                    <h3>Лаг-машины</h3>
+                    <p>Запрещено намеренно нагружать сервер и ронять TPS.</p>
+                </div>
+
+                <div class="rule-item">
+                    <h3>Поведение в чате</h3>
+                    <p>Запрещен расизм, чрезмерный мат и токсичность.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mods-section">
+            <h2 class="section-header">🚫 Blacklist Модификаций</h2>
+            
+            <div class="mods-grid">
+                <div class="mod-card">
+                    <h3>1. Чит-клиенты</h3>
+                    <ul class="mod-list">
+                        <li>Meteor Client, Wurst, Impact</li>
+                        <li>Aristois, Future, Inertia</li>
+                        <li>Kami Blue</li>
+                        <li>Любые Ghost-клиенты (Vape и др.)</li>
+                    </ul>
+                </div>
+
+                <div class="mod-card">
+                    <h3>2. Бой (Combat)</h3>
+                    <ul class="mod-list">
+                        <li>KillAura / Aura</li>
+                        <li>Reach (удлиненная рука)</li>
+                        <li>Hitboxes, Aimbot</li>
+                        <li>Anti-Knockback / Velocity</li>
+                        <li>AutoClicker / Macros</li>
+                        <li>AutoTotem / AutoArmor</li>
+                        <li>Criticals</li>
+                    </ul>
+                </div>
+
+                <div class="mod-card">
+                    <h3>3. Передвижение</h3>
+                    <ul class="mod-list">
+                        <li>Fly, ElytraFly</li>
+                        <li>Speed / BunnyHop</li>
+                        <li>Jesus / WaterWalk</li>
+                        <li>Spider, NoFall</li>
+                        <li>Step, Blink</li>
+                    </ul>
+                </div>
+
+                <div class="mod-card">
+                    <h3>4. Рендер и Мир</h3>
+                    <ul class="mod-list">
+                        <li>X-Ray (Мод)</li>
+                        <li>ESP (Player/Chest/Item)</li>
+                        <li>Tracers, Freecam</li>
+                        <li>CaveFinder</li>
+                        <li>VoxelMap (с радаром)</li>
+                    </ul>
+                </div>
+
+                <div class="mod-card">
+                    <h3>5. Автоматизация</h3>
+                    <ul class="mod-list">
+                        <li>Baritone (Бот)</li>
+                        <li>Nuker</li>
+                        <li>Scaffold</li>
+                        <li>AutoMine / AutoFish</li>
+                        <li>Printer (функция автостройки)</li>
+                    </ul>
+                </div>
+
+                <div class="mod-card">
+                    <h3>6. Текстур-паки</h3>
+                    <ul class="mod-list">
+                        <li>X-Ray Texture Packs (прозрачные блоки)</li>
+                        <li>Player Detector Packs (яркая броня/ники)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="whitelist-section">
+            <h2>✅ White List (Разрешено)</h2>
+            <div class="whitelist-grid">
+                <div class="white-item">Optifine / Sodium / Iris</div>
+                <div class="white-item">Litematica (только голограмма)</div>
+                <div class="white-item">MiniMap (Fair Play, без радара)</div>
+                <div class="white-item">Shaders</div>
+                <div class="white-item">Appleskin</div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 SMP mra31. Соблюдайте правила и приятной игры!</p>
+        <p>made by mra31</p>
+    </footer>
+
+</body>
+</html>

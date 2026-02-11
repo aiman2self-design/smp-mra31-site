@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMP mra31 - Minecraft Server</title>
+    <style>
+        /* --- Сброс стилей и переменные --- */
+        :root {
+            --bg-color: #050505;
+            --card-bg: #0f0f12;
+            --primary-color: #9d00ff;
+            /* Яркий фиолетовый */
+            --primary-dark: #5e0099;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- Хедер и Навигация --- */
+        header {
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+            /* SMP - белый */
+        }
+
+        .logo span {
+            color: var(--primary-color);
+            /* mra31 - фиолетовый */
+            text-shadow: 0 0 10px rgba(157, 0, 255, 0.6);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 8px var(--primary-color);
+        }
+
+        /* --- Hero Секция (Главная) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a0525 0%, #000000 70%);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        /* Кнопка IP */
+        .ip-container {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .btn-main {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: #fff;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-main:hover {
+            background: var(--primary-color);
+            box-shadow: 0 0 30px rgba(157, 0, 255, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .copy-tooltip {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .copy-tooltip.active {
+            opacity: 1;
+        }
+
+        /* --- Секция "О сервере" --- */
+        .features {
+            padding: 100px 5%;
+            background: #080808;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            color: var(--primary-color);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #1f1f1f;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .tgtext{
+            color: var(--text-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 1px solid #1f1f1f;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            /* Для простоты на мобильных скрываем меню */
+            .logo {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">SMP <span>mra31</span></div>
+        <nav>
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="./rules.html">Правила</a></li>
+                <li><a href="./donat.html">Донат</a></li>
+            </ul>
+        </nav>
+    </header>
+git init
+    <section class="hero">
+        <h1>Добро пожаловать</h1>
+        <p>Уникальный мир выживания, где создаешь историю ты. Присоединяйся к сообществу SMP mra31 уже сегодня.</p>
+
+        <div class="ip-container" onclick="copyIp()">
+            <div class="copy-tooltip" id="tooltip">IP скопирован!</div>
+            <button class="btn-main" id="ip-btn">IP: 185.206.149.25:25603</button>
+        </div>
+    </section>
+
+    <section class="features" id="about">
+        <h2 class="section-title">Почему <span>SMP mra31</span>?</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>⚔️ Ванильное выживание</h3>
+                <p>Классический геймплей без лишних модов, портящих атмосферу. Только ты и мир Minecraft.</p>
+            </div>
+
+            <div class="card">
+                <h3>💬 Наш телеграм канал</h3>
+                <p>Тут можно обсуждать с игроками всю информацию о сервере <br> <a href="https://t.me/+BVSpqoSj-0NlNzhi" style="color: var(--primary-color);">Телеграм канал</a></p>
+                
+            </div>
+
+            <div class="card">
+                <h3>🚀 Стабильный TPS</h3>
+                <p>Мощное оборудование обеспечивает игру без лагов даже при высоком онлайне.</p>
+            </div>
+        </div>
+    </section>
+    <!-- ✅ ЧТО МОЖНО ДЕЛАТЬ:
+Гриферство: Разрешено! Вы можете грабить базы, взрывать постройки и забирать чужие ресурсы. Это часть игрового процесса.(P.S. Администрация не восстанавливает вещи, потерянные в результате гриферства. Прячьте свои базы лучше!)
+
+
+ПВП: Сражайтесь везде, где встретите противника (кроме спавна).
+
+
+Торговля и союзы: Объединяйтесь в кланы, стройте общие города и торгуйте ресурсами. ‼️ Но Макс игроков в тиме только ❗️2❗️. Если будет больше 2 = бан на 2 дня и очистка инвентаря всем кто был в тиме 
+
+
+Ловушки: Стройте хитроумные механизмы для защиты своей базы или поимки врагов. -->
+
+    <section class="features" id="rules">
+        <h2 class="section-title">Правила <span>SMP mra31</span></h2>
+        <p>Смотрите что можно и нельзя делать на другой странице:</p><br>
+        <a href="rules.html" class="btn-main">Правила</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 SMP mra31. Все права защищены.</p>
+        <p>made by mra31</p>
+    </footer>
+
+    <script>
+        function copyIp() {
+            // IP адрес сервера
+            const serverIp = "185.206.149.25:25603";
+
+            // Телеграм канал
+            const telegramLink = "https://t.me/+BVSpqoSj-0NlNzhi";
+
+            // Копирование в буфер обмена айпи
+            navigator.clipboard.writeText(serverIp).then(() => {
+                // Показать уведомление
+                const tooltip = document.getElementById("tooltip");
+                const btn = document.getElementById("ip-btn");
+
+                tooltip.classList.add("active");
+                btn.style.borderColor = "#fff";
+
+                // Убрать уведомление через 2 секунды
+                setTimeout(() => {
+                    tooltip.classList.remove("active");
+                    btn.style.borderColor = "var(--primary-color)";
+                }, 2000);
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+                alert("IP: " + serverIp);
+            });
+
+
+             // Копирование в буфер обмена тгк
+            navigator.clipboard.writeText(telegramLink).then(() => {
+                // Показать уведомление
+                const tooltip = document.getElementById("tooltip-telegram");
+                const btn = document.getElementById("telegramLink");
+
+                tooltip.classList.add("active");
+                btn.style.borderColor = "#fff";
+
+                // Убрать уведомление через 2 секунды
+                setTimeout(() => {
+                    tooltip.classList.remove("active");
+                    btn.style.borderColor = "var(--primary-color)";
+                }, 2000);
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+                alert("Telegram channel: " + telegramLink);
+            });
+        }
+    </script>
+</body>
+
+</html>
