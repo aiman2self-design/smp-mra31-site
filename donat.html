@@ -215,6 +215,13 @@
             cursor: pointer;
         }
 
+        input[type="range"] {
+            width: 100%;
+            margin-top: 15px;
+            accent-color: var(--primary-color);
+        }
+
+
         @media (max-width: 768px) {
             .burger {
                 display: block;
@@ -375,6 +382,23 @@
                     <a href="#" class="buy-btn" onclick="openModal('Разбан')">Купить</a>
                 </div>
                 <div class="card">
+                    <h3>Покупка коинов</h3>
+                    <p>Выберите количество коинов</p>
+
+                    <input type="range" id="coinRange" min="100" max="10000" step="100" value="1000"
+                        oninput="updateCoins()">
+
+                    <p style="margin-top:10px;">
+                        Коины: <b><span id="coinAmount">1000</span></b>
+                    </p>
+
+                    <div class="price">
+                        <span id="coinPrice">100</span> сом
+                    </div>
+
+                    <a href="#" class="buy-btn" onclick="openCoinModal()">Купить</a>
+                </div>
+                <div class="card">
                     <h3>Колесо фортуны</h3>
                     <div class="price">399 сом</div>
                     <a href="#" class="buy-btn" onclick="openModal('Колесо фортуны')">Купить</a>
@@ -409,27 +433,46 @@
             document.getElementById("nav-menu").classList.toggle("active");
         }
 
+        function updateCoins() {
+            const range = document.getElementById("coinRange");
+            const amount = document.getElementById("coinAmount");
+            const price = document.getElementById("coinPrice");
+
+            amount.innerText = range.value;
+
+            // Пример: 100 коинов = 10 сом
+            let calculatedPrice = range.value / 10;
+            price.innerText = calculatedPrice;
+        }
+
+        function openCoinModal() {
+            const coins = document.getElementById("coinAmount").innerText;
+            document.getElementById("paymentModal").style.display = "block";
+            document.getElementById("productName").innerText = "Вы покупаете: " + coins + " коинов";
+        }
+
+
         function openDetails(role) {
             const title = document.getElementById('detailsTitle');
             const text = document.getElementById('detailsText');
 
             if (role === 'VIP') {
                 title.innerText = 'VIP Привилегия';
-                text.innerHTML = 'Команды и возможности:<br>• fly<br>• heal<br>• chatcolor';
+                text.innerHTML = 'Команды и возможности:<br>• fly-летать<br>• heal-лечить<br>• chatcolor-цвет в чате';
             } else if (role === 'PREMIUM') {
                 title.innerText = 'PREMIUM Привилегия';
-                text.innerHTML = 'Команды и возможности:<br>• fly<br>• heal<br>• chatcolor<br>• feed<br>• extinguish<br>• joinfullserver';
+                text.innerHTML = 'Команды и возможности:<br>• fly-летать<br>• heal-лечить<br>• chatcolor-цвет в чате<br>• feed-покормить себя<br>• extinguish-потушить себя<br>• joinfullserver-присоединиться к полному серверу';
             } else if (role === 'LEGEND') {
                 title.innerText = 'LEGEND Привилегия';
-                text.innerHTML = 'Команды и возможности:<br>• fly<br>• heal<br>• chatcolor<br>• feed<br>• extinguish<br>• joinfullserver<br>• все команды PREMIUM + особый префикс';
+                text.innerHTML = 'Команды и возможности:<br>• fly-летать<br>• heal-лечить<br>• chatcolor-цвет в чате<br>• feed-покормить себя<br>• extinguish-потушить сбея<br>• joinfullserver-присоединиться к полному серверу<br>• invsee-посмотреть инвентарь игрока<br>• repair-чинить вещи<br>• near-игроки в радиусе 100 блоков<br>• tp-телепорт без одобрение игрока';
             } else if (role === 'Wheel') {
                 title.innerText = 'Колесо фортуны 🎡';
-                text.innerHTML = 'Возможные награды:<br>• Киты (Железный, Алмазный, Незерит)<br>• Привилегии на 3 дня<br>• Случайные предметы (алмазы, тотемы)<br>• Редкие бонусы (пефикс, уникальный предмет)<br><br>Каждое вращение — шанс получить уникальный приз!';
+                text.innerHTML = 'Возможные награды:<br>• Монеты / валюта сервера<br>• Киты (Железный, Алмазный, Незерит)<br>• Привилегии на 1 день<br>• Случайные предметы (алмазы, тотемы)<br>• Редкие бонусы (пефикс, уникальный предмет)<br><br>Каждое вращение — шанс получить уникальный приз!';
             }
+
 
             document.getElementById('detailsModal').style.display = 'block';
         }
-
 
         function closeDetails() {
             document.getElementById('detailsModal').style.display = 'none';
