@@ -302,21 +302,35 @@
                     <h3>Железный Кит</h3>
                     <p>Железная броня + инструменты + 16 стейков</p>
                     <div class="price">149 сом</div>
-                    <a href="#" class="buy-btn" onclick="openModal('Железный Кит')">Купить</a>
+                    <a href="#" class="buy-btn" onclick="openModal('Железный Кит', '149 сом' )">Купить</a>
 
                 </div>
                 <div class="card">
                     <h3>Алмазный Кит</h3>
                     <p>Алмазная броня + меч + тотем</p>
                     <div class="price">299 сом</div>
-                    <a href="#" class="buy-btn" onclick="openModal('Алмазный Кит')">Купить</a>
+                    <a href="#" class="buy-btn" onclick="openModal('Алмазный Кит', '299 сом')">Купить</a>
 
                 </div>
                 <div class="card">
                     <h3>Незеритовый Кит</h3>
                     <p>Фулл незерит + зачарования + 2 тотема</p>
                     <div class="price">499 сом</div>
-                    <a href="#" class="buy-btn" onclick="openModal('Незеритовый Кит')">Купить</a>
+                    <a href="#" class="buy-btn" onclick="openModal('Незеритовый Кит', '499 сом')">Купить</a>
+
+                </div>
+                <div class="card">
+                    <h3>ПВП Кит</h3>
+                    <p>Любой кит пвп, тнт кит, кристал пвп,булава пвп и т.д.</p>
+                    <div class="price">599 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('Пвп Кит', '599 сом')">Купить</a>
+
+                </div>
+                <div class="card">
+                    <h3>Шахта Кит</h3>
+                    <p>Топ незеритовая кирка + еда + факела</p>
+                    <div class="price">199 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('Шахта Кит', '199 сом')">Купить</a>
 
                 </div>
             </div>
@@ -324,26 +338,27 @@
 
         <!-- Предметы -->
         <div class="section">
-            <h2>💎 Драгоценные предметы</h2>
+            <h2>⚔ ПВП</h2>
             <div class="grid">
                 <div class="card">
-                    <h3>1 Алмазный блок</h3>
-                    <div class="price">199 сом</div>
-                    <a href="#" class="buy-btn" onclick="openModal('1 Алмазный блок')">Купить</a>
-
-                </div>
-                <div class="card">
-                    <h3>1 Незеритовый слиток</h3>
+                    <h3>Топ булава</h3>
                     <div class="price">399 сом</div>
-                    <a href="#" class="buy-btn" onclick="openModal('1 Незеритовый слиток')">Купить</a>
+                    <a href="#" class="buy-btn" onclick="openModal('Топ булава', '399 сом')">Купить</a>
 
                 </div>
                 <div class="card">
-                    <h3>5 Тотемов</h3>
-                    <div class="price">179 сом</div>
-                    <a href="#" class="buy-btn" onclick="openModal('5 Тотемов')">Купить</a>
+                    <h3>Топ меч</h3>
+                    <div class="price">399 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('Топ меч', '399 сом')">Купить</a>
 
                 </div>
+                <div class="card">
+                    <h3>Топ броня</h3>
+                    <div class="price">399 сом</div>
+                    <a href="#" class="buy-btn" onclick="openModal('Топ броня', '399 сом')">Купить</a>
+
+                </div>
+
             </div>
         </div>
 
@@ -354,19 +369,19 @@
                 <div class="card">
                     <h3>VIP</h3>
                     <div class="price">249 сом</div>
-                    <a href="#" class="buy-btn" onclick="openModal('VIP')">Купить</a>
+                    <a href="#" class="buy-btn" onclick="openModal('VIP', '249 сом')">Купить</a>
                     <a href="#" class="buy-btn" onclick="openDetails('VIP')">Подробнее...</a>
                 </div>
                 <div class="card">
                     <h3>PREMIUM</h3>
                     <div class="price">399 сом</div>
-                    <a href="#" class="buy-btn" onclick="openModal('PREMIUM')">Купить</a>
+                    <a href="#" class="buy-btn" onclick="openModal('PREMIUM', '399 сом')">Купить</a>
                     <a href="#" class="buy-btn" onclick="openDetails('PREMIUM')">Подробнее...</a>
                 </div>
                 <div class="card">
                     <h3>LEGEND</h3>
                     <div class="price">699 сом</div>
-                    <a href="#" class="buy-btn" onclick="openModal('LEGEND')">Купить</a>
+                    <a href="#" class="buy-btn" onclick="openModal('LEGEND', '699 сом')">Купить</a>
                     <a href="#" class="buy-btn" onclick="openDetails('LEGEND')">Подробнее...</a>
                 </div>
             </div>
@@ -379,7 +394,7 @@
                 <div class="card">
                     <h3>Разбан</h3>
                     <div class="price">999 сом</div>
-                    <a href="#" class="buy-btn" onclick="openModal('Разбан')">Купить</a>
+                    <a href="#" class="buy-btn" onclick="openModal('Разбан', '999 сом')">Купить</a>
                 </div>
                 <div class="card">
                     <h3>Покупка коинов</h3>
@@ -393,10 +408,10 @@
                     </p>
 
                     <div class="price">
-                        <span id="coinPrice">100</span> сом
+                        <span id="coinPrice">...</span> сом
                     </div>
 
-                    <a href="#" class="buy-btn" onclick="openCoinModal()">Купить</a>
+                    <a href="#" class="buy-btn" onclick="openCoinModal('')">Купить</a>
                 </div>
                 <div class="card">
                     <h3>Колесо фортуны</h3>
@@ -441,15 +456,21 @@
             amount.innerText = range.value;
 
             // Пример: 100 коинов = 10 сом
-            let calculatedPrice = range.value / 10;
+            let calculatedPrice = range.value * 0.05;
             price.innerText = calculatedPrice;
         }
 
         function openCoinModal() {
             const coins = document.getElementById("coinAmount").innerText;
+            const price = document.getElementById("coinPrice").innerText;
+
             document.getElementById("paymentModal").style.display = "block";
-            document.getElementById("productName").innerText = "Вы покупаете: " + coins + " коинов";
+
+            document.getElementById("productName").innerHTML =
+                "Вы покупаете: <b>" + coins + " коинов</b><br>" +
+                "Стоимость: <b>" + price + " " + CURRENCY + "</b>";
         }
+
 
 
         function openDetails(role) {
@@ -458,16 +479,16 @@
 
             if (role === 'VIP') {
                 title.innerText = 'VIP Привилегия';
-                text.innerHTML = 'Команды и возможности:<br>• fly-летать<br>• heal-лечить<br>• chatcolor-цвет в чате';
+                text.innerHTML = 'Команды и возможности:<br>• fly-летать<br>• heal-лечить<br>• chatcolor-цвет в чате<br>• 2 дома';
             } else if (role === 'PREMIUM') {
                 title.innerText = 'PREMIUM Привилегия';
-                text.innerHTML = 'Команды и возможности:<br>• fly-летать<br>• heal-лечить<br>• chatcolor-цвет в чате<br>• feed-покормить себя<br>• extinguish-потушить себя<br>• joinfullserver-присоединиться к полному серверу';
+                text.innerHTML = 'Команды и возможности:<br>• fly-летать<br>• heal-лечить<br>• chatcolor-цвет в чате<br>• feed-покормить себя<br>• extinguish-потушить себя<br>• joinfullserver-присоединиться к полному серверу<br>• 4 дома';
             } else if (role === 'LEGEND') {
                 title.innerText = 'LEGEND Привилегия';
-                text.innerHTML = 'Команды и возможности:<br>• fly-летать<br>• heal-лечить<br>• chatcolor-цвет в чате<br>• feed-покормить себя<br>• extinguish-потушить сбея<br>• joinfullserver-присоединиться к полному серверу<br>• invsee-посмотреть инвентарь игрока<br>• repair-чинить вещи<br>• near-игроки в радиусе 100 блоков<br>• tp-телепорт без одобрение игрока';
+                text.innerHTML = 'Команды и возможности:<br>• fly-летать<br>• heal-лечить<br>• chatcolor-цвет в чате<br>• feed-покормить себя<br>• extinguish-потушить сбея<br>• joinfullserver-присоединиться к полному серверу<br>• invsee-посмотреть инвентарь игрока<br>• repair-чинить вещи<br>• near-игроки в радиусе 100 блоков<br>• tp-телепорт без одобрение игрока<br>• 6 дома';
             } else if (role === 'Wheel') {
                 title.innerText = 'Колесо фортуны 🎡';
-                text.innerHTML = 'Возможные награды:<br>• Монеты / валюта сервера<br>• Киты (Железный, Алмазный, Незерит)<br>• Привилегии на 1 день<br>• Случайные предметы (алмазы, тотемы)<br>• Редкие бонусы (пефикс, уникальный предмет)<br><br>Каждое вращение — шанс получить уникальный приз!';
+                text.innerHTML = 'Возможные награды:<br>• $ / валюта сервера<br>• Киты (Железный, Алмазный, Незерит)<br>• Привилегии на 6 дней<br>• Случайные предметы (алмазы, тотемы)<br>• Редкие бонусы (пефикс, уникальный предмет)<br><br>Каждое вращение — шанс получить уникальный приз!';
             }
 
 
@@ -477,6 +498,38 @@
         function closeDetails() {
             document.getElementById('detailsModal').style.display = 'none';
         }
+
+        function openModal(product, price) {
+            document.getElementById("paymentModal").style.display = "block";
+            document.getElementById("productName").innerText = "Вы покупаете: " + product;
+            document.getElementById("productPrice").innerText = "Стоимость: " + price;
+        }
+
+
+        let COIN_RATE = 0.1; // курс по умолчанию (KGZ)
+        let CURRENCY = "сом";
+
+        fetch("https://ipapi.co/json/")
+            .then(response => response.json())
+            .then(data => {
+                if (data.country === "RU") {
+                    COIN_RATE = 0.1; // 1 коин = 1 рубль
+                    CURRENCY = "₽";
+                }
+                updateCoins();
+            });
+
+        // function updateCoins() {
+        //     const range = document.getElementById("coinRange");
+        //     const amount = document.getElementById("coinAmount");
+        //     const price = document.getElementById("coinPrice");
+
+        //     amount.innerText = range.value;
+
+        //     let calculatedPrice = range.value * COIN_RATE;
+        //     price.innerText = calculatedPrice + " " + CURRENCY;
+        // }
+
 
 
     </script>
@@ -496,6 +549,8 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Оплата</h2>
             <p id="productName"></p>
+            <p id="productPrice" style="font-size:1.2rem;color:#00ff9d;"></p>
+
             <img src="./photo_2026-02-11_22-31-35.jpg" alt="QR Код" class="qr-image">
             <p class="pay-text">
                 1️⃣ Отсканируйте QR и оплатите<br>
