@@ -121,17 +121,16 @@
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(157, 0, 255, 0.2);
             position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
+
+            /* ✨ АУРА ВОКРУГ BORDER */
+            box-shadow:
+                0 0 5px var(--primary-color),
+                0 0 15px var(--primary-color),
+                0 0 30px rgba(157, 0, 255, 0.6);
         }
 
-        .btn-main:hover {
-            background: var(--primary-color);
-            box-shadow: 0 0 30px rgba(157, 0, 255, 0.6);
-            transform: translateY(-3px);
-        }
 
         .copy-tooltip {
             position: absolute;
@@ -240,7 +239,6 @@
 
 
         /* Адаптивность */
-
     </style>
 </head>
 
