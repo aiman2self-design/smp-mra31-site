@@ -131,6 +131,27 @@
                 0 0 30px rgba(157, 0, 255, 0.6);
         }
 
+        .btn-main {
+            animation: borderGlow 2s infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            from {
+                box-shadow:
+                    0 0 5px var(--primary-color),
+                    0 0 10px var(--primary-color),
+                    0 0 20px rgba(157, 0, 255, 0.5);
+            }
+
+            to {
+                box-shadow:
+                    0 0 10px var(--primary-color),
+                    0 0 25px var(--primary-color),
+                    0 0 45px rgba(157, 0, 255, 0.9);
+            }
+        }
+
+
 
         .copy-tooltip {
             position: absolute;
@@ -319,22 +340,15 @@
         }
 
         function copyIp() {
-            // IP адрес сервера
             const serverIp = "185.206.149.25:25603";
 
-            // Телеграм канал
-            const telegramLink = "https://t.me/+BVSpqoSj-0NlNzhi";
-
-            // Копирование в буфер обмена айпи
             navigator.clipboard.writeText(serverIp).then(() => {
-                // Показать уведомление
                 const tooltip = document.getElementById("tooltip");
                 const btn = document.getElementById("ip-btn");
 
                 tooltip.classList.add("active");
                 btn.style.borderColor = "#fff";
 
-                // Убрать уведомление через 2 секунды
                 setTimeout(() => {
                     tooltip.classList.remove("active");
                     btn.style.borderColor = "var(--primary-color)";
@@ -343,27 +357,9 @@
                 console.error('Ошибка копирования: ', err);
                 alert("IP: " + serverIp);
             });
-
-
-            // Копирование в буфер обмена тгк
-            navigator.clipboard.writeText(telegramLink).then(() => {
-                // Показать уведомление
-                const tooltip = document.getElementById("tooltip-telegram");
-                const btn = document.getElementById("telegramLink");
-
-                tooltip.classList.add("active");
-                btn.style.borderColor = "#fff";
-
-                // Убрать уведомление через 2 секунды
-                setTimeout(() => {
-                    tooltip.classList.remove("active");
-                    btn.style.borderColor = "var(--primary-color)";
-                }, 2000);
-            }).catch(err => {
-                console.error('Ошибка копирования: ', err);
-                alert("Telegram channel: " + telegramLink);
-            });
         }
+
+
     </script>
 </body>
 
